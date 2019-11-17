@@ -1,0 +1,54 @@
+version: "3.3"
+services: 
+  # STREAMSETS CONFIGURATION
+  streamsets:
+    image: streamsets/datacollector:3.11.0
+    hostname: streamsets-dc
+    container_name: streamsets-dc
+    volumes: 
+      - ./dhs-data/streamsets/streamsets-libs:/opt/streamsets-datacollector-3.11.0/streamsets-libs
+      - ./dhs-data/streamsets/data:/data
+    ports:
+      - 18630:18630
+
+  # KAFKA CONFIGURATION
+  zookeeper:
+    image: 'bitnami/zookeeper:3.4.12-r68'
+    hostname: zookeeper
+    container_name: zookeeper
+    ports:
+      - 2181:2181
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
+    image: 'bitnami/kafka:2.0.0'
+    hostname: kafkabroker
+    container_name: kafkabroker
+    ports:
+      - 9092:9092
+    depends_on: 
+      - zookeeper
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_DELETE_TOPIC_ENABLE=true
+
+  # Postgres configuration
+  postgres:
+    image: postgres:9-alpine
+    hostname: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./dhs-data/postgres_data:/var/lib/postgresql/data
+      - ./config:/var/demo/config
+    ports:
+      - 5432:5432
+  
+  adhoc:
+    image: bde2020/spark-base:2.4.4-hadoop2.7
+    container_name: adhoc
+    volumes: 
+      - ./config:/var/demo/config
+    tty: true

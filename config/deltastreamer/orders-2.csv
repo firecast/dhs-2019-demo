@@ -1,0 +1,4 @@
+order_id,customer_id,employee_id,order_date,required_date,shipped_date,ship_via,freight,ship_name,ship_address,ship_city,ship_region,ship_postal_code,ship_country,date
+11078,RICSU,8,1998-05-06 00:00:00.000,1998-06-03 00:00:00.000,NULL,2,6.19,Richter Supermarkt,Starenweg 5,Genève,NULL,1204,Switzerland,2019/10/25
+11079,BONAP,4,1998-05-06 00:00:00.000,1998-06-03 00:00:00.000,NULL,2,38.28,Bon app',12 rue des Bouchers,Marseille,NULL,13008,France,2019/10/25
+11080,RATTC,1,1998-05-06 00:00:00.000,1998-06-03 00:00:00.000,NULL,2,8.53,Rattlesnake Canyon Grocery,2817 Milton Dr.,Albuquerque,NM,87110,USA,2019/10/25
