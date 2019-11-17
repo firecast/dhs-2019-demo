@@ -1,3 +1,5 @@
+### Don't forget to add packages to your streamsets container and replace `<ACCESS_KEY>` and `<SECRET_KEY>`with your aws credentials.
+
 # Spark writer
 ```bash
 docker exec -it adhoc /bin/bash
@@ -58,7 +60,8 @@ docker exec -it adhoc /bin/bash
 --jars /var/demo/config/spark-packages/hudi-spark-bundle-0.5.0-incubating.jar
 ```
 
-```scalaval ordersDF = spark.
+```scala
+val ordersDF = spark.
     read.
     format("org.apache.hudi").
     load("s3a://atlan-dhs/lake/orders/*/*/*/*")
